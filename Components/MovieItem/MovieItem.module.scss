@@ -1,0 +1,78 @@
+.MovieItem-wrapper {
+    width: 172px;
+
+    &:hover .MovieItem-img-wrapper > .MovieItem-hover {
+        display: block;
+    }
+
+    .MovieItem-img-wrapper {
+        width: 100%;
+        position: relative;
+        img {
+            border-radius: 10px;
+            width: 100%;
+            object-fit: cover;
+        }
+        .MovieItem-quality {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: white;
+            padding: 1px 6px;
+            border-radius: 3px;
+        }
+
+        .MovieItem-hover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: none;
+            background-color: rgba(0, 0, 0, 0.5);
+
+            .MovieItem-Play-iconHover {
+                color: var(--primary-color);
+                background-color: white;
+                border-radius: 50%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 5rem;
+            }
+        }
+    }
+
+    .MovieItem-description {
+        .MovieItem-name {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            line-height: 3rem;
+        }
+
+        .MovieItem-infor {
+            display: flex;
+            justify-content: space-between;
+            .MovieItem-infor-time {
+                display: flex;
+                width: 50%;
+                align-items: center;
+                justify-content: space-around;
+
+                .MovieItem-movie-dot {
+                    width: 3px;
+                    height: 3px;
+                    background-color: black;
+                    display: inline-block;
+                    border-radius: 50%;
+                }
+            }
+            .MovieItem-infor-type {
+                border: 1px solid;
+                padding: 0 5px;
+            }
+        }
+    }
+}

@@ -1,0 +1,23 @@
+@import 'normalize.css';
+
+* {
+    box-sizing: border-box !important;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --primary-color: #17a2b8;
+}
+
+html {
+    /* 62,5% thif 1 rem= 10xp */
+    font-size: 62.5%;
+    line-height: 1.6rem;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed; // tối ưu tốc độ render font
+    //overlay de thanh cuon khong chiem dien tich tren trang
+    // overflow-y: overlay;
+}
