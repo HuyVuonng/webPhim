@@ -84,7 +84,9 @@ function Header() {
                     <h1 className={cx('Header-logo-title')}>FlixTor.video</h1>
                 </div>
                 <ul className={cx('Header-nav-list')}>
-                    <li className={cx('Header-nav-list-item')}>Home</li>
+                    <Link to={'/'}>
+                        <li className={cx('Header-nav-list-item')}>Home</li>
+                    </Link>
                     <div>
                         <HeadlessTippy
                             interactive
@@ -120,9 +122,15 @@ function Header() {
                             <li className={cx('Header-nav-list-item')}>country</li>
                         </HeadlessTippy>
                     </div>
-                    <li className={cx('Header-nav-list-item')}>movies</li>
-                    <li className={cx('Header-nav-list-item')}>tv shows</li>
-                    <li className={cx('Header-nav-list-item')}>top imdb</li>
+                    <Link to={'/'}>
+                        <li className={cx('Header-nav-list-item')}>movies</li>
+                    </Link>
+                    <Link to="/">
+                        <li className={cx('Header-nav-list-item')}>tv shows</li>
+                    </Link>
+                    <Link to="/">
+                        <li className={cx('Header-nav-list-item')}>top imdb</li>
+                    </Link>
                 </ul>
 
                 <div className={cx('Header-login-register')}>

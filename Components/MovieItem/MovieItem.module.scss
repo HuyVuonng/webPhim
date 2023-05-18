@@ -24,10 +24,12 @@
 
         .MovieItem-hover {
             position: absolute;
+            height: 100%;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
+            border-radius: 10px;
             display: none;
             background-color: rgba(0, 0, 0, 0.5);
 
@@ -73,6 +75,76 @@
                 border: 1px solid;
                 padding: 0 5px;
             }
+        }
+    }
+}
+
+.movie-item-block {
+    position: relative;
+    &:hover .MovieItem-hover-description {
+        display: block;
+    }
+}
+
+.MovieItem-hover-description {
+    width: 260px;
+    padding: 5px 15px;
+    position: absolute;
+    top: 30%;
+    right: -120%;
+    display: none;
+    // transform: translateY(100%);
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    z-index: 2;
+    border-radius: 5px;
+
+    .MovieItem-hover-description-name {
+        font-size: 1.7rem;
+        color: var(--primary-color);
+    }
+
+    .MovieItem-hover-description-infor {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.4rem;
+        .MovieItem-hover-description-year {
+        }
+        .MovieItem-hover-description-duration {
+        }
+
+        .MovieItem-hover-description-quality {
+            color: white;
+            padding: 1px 5px;
+            border-radius: 3px;
+            background-color: var(--primary-color);
+        }
+    }
+
+    .MovieItem-hover-description-summary {
+        color: #6c757d;
+        margin: 5px 0;
+        font-size: 1.3rem;
+    }
+    .MovieItem-hover-description-country,
+    .MovieItem-hover-description-Genre {
+        color: #6c757d;
+        font-size: 1.2rem;
+    }
+
+    .watch {
+        margin: 15px 0;
+        width: 100%;
+        background-color: var(--primary-color);
+        color: white;
+        display: block;
+        text-align: center;
+        padding: 10px 0;
+        border-radius: 5px;
+        font-size: 1.4rem;
+
+        &:hover {
+            filter: brightness(70%);
         }
     }
 }

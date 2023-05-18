@@ -1,5 +1,6 @@
 // import Footer from '../Components/Footer/Footer';
-import Header from '../Components/Header/Header';
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
 import classNames from 'classnames/bind';
 import styles from './DefaulLayout.module.scss';
 
@@ -12,7 +13,7 @@ function DefaultLayout({ children }) {
             <main className={cx('container')}>
                 <aside className="content">{children}</aside>
             </main>
-            {/* <Footer /> */}
+            <Footer />
         </div>
     );
 }

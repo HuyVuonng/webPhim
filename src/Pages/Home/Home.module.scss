@@ -4,9 +4,21 @@
 
     .Home-content {
         .Home-content-block {
+            margin-top: 50px;
             .Home-lable-wrapper {
                 display: flex;
                 align-items: center;
+
+                &.haveViewAll {
+                    justify-content: space-between;
+                }
+                .ViewAll {
+                    color: var(--primary-color);
+                    font-size: 1.6rem;
+                    &:hover {
+                        filter: brightness(70%);
+                    }
+                }
 
                 .Home-title {
                     color: var(--primary-color);
