@@ -12,7 +12,6 @@ import ListMovie from '../../redux/reducer/ListMovie';
 const cx = classNames.bind(styles);
 
 function Home() {
-    window.scrollTo(0, 0);
     const isFirst = useRef(true);
     const dispatch = useDispatch();
 
@@ -44,6 +43,8 @@ function Home() {
     };
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+        document.title = 'Home';
         const width = document.body.clientWidth;
         const soItem = Math.floor(width / 200);
         const box = document.querySelectorAll(`.${cx('Home-content-list-movie')}`);
