@@ -122,7 +122,7 @@ function Header() {
                             <li className={cx('Header-nav-list-item')}>country</li>
                         </HeadlessTippy>
                     </div>
-                    <Link to={'/'}>
+                    <Link to={'/movie?page=1'}>
                         <li className={cx('Header-nav-list-item')}>movies</li>
                     </Link>
                     <Link to="/">

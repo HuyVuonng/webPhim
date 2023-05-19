@@ -1,5 +1,4 @@
 .Home-wrapper {
-    margin-top: 100px;
     padding: 0 30px;
 
     .Home-content {
@@ -62,8 +61,6 @@
             .Home-content-list-movie {
                 margin-top: 50px;
                 display: grid;
-                grid-template-columns: repeat(7, 1fr);
-                // column-gap: 5px;
                 row-gap: 20px;
             }
         }

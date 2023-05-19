@@ -11,7 +11,7 @@ function DefaultLayout({ children }) {
         <div className="wrapper">
             <Header />
             <main className={cx('container')}>
-                <aside className="content">{children}</aside>
+                <aside className={cx('content')}>{children}</aside>
             </main>
             <Footer />
         </div>
