@@ -4,12 +4,11 @@ import { useEffect, useState } from 'react';
 import httpRequest from '../../httpRequest/httprequest';
 import MovieItem from '../../../Components/MovieItem/MovieItem';
 import ReactPaginate from 'react-paginate';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 function Movie() {
-    const params = useParams();
     const [movieItem, setMovieItem] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams({});
     let currentPage = searchParams.get('page');
@@ -36,7 +35,7 @@ function Movie() {
     useEffect(() => {
         getData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [params]);
+    }, [currentPage]);
 
     const handlePageClick = async (event) => {
         let page = event.selected + 1;
