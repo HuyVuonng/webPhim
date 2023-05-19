@@ -11,7 +11,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        column-gap: 250px;
+
         .Header-logo {
             height: 100%;
             display: flex;
@@ -32,7 +32,6 @@
             list-style: none;
             display: flex;
             justify-content: space-between;
-            flex: 1;
             .Header-nav-list-item {
                 color: #8c8c8d;
                 font-size: 1.5rem;
@@ -96,6 +95,223 @@
             font-weight: 100;
             font-size: 3.5rem;
             line-height: initial;
+        }
+    }
+}
+
+.modal-mobile {
+    display: none;
+}
+.Header-Wrapper-mobile {
+    display: none;
+}
+
+/*mobile*/
+@media only screen and (max-width: 46.1875em) {
+    .Header-Wrapper {
+        display: none;
+    }
+
+    .Header-Wrapper-mobile {
+        display: block;
+        background-color: #000000;
+        height: 120px;
+        position: relative;
+        padding: 5px 15px;
+        .Header-mobile-nav {
+            display: flex;
+            justify-content: space-between;
+            color: white;
+            height: 50%;
+            align-items: center;
+            .Header-mobile-bars {
+                font-size: 3.4rem;
+            }
+            .Header-mobile-logo {
+                height: 100%;
+                display: flex;
+                align-items: center;
+                .header-mobile-logo-img {
+                    height: 60%;
+                    object-fit: cover;
+                }
+            }
+            .Header-mobile-user {
+                font-size: 3.4rem;
+            }
+        }
+    }
+
+    .modal-mobile {
+        position: fixed;
+        z-index: 99;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: black;
+        animation: fadeIn linear 0.1s;
+
+        &.open {
+            display: block;
+        }
+
+        .modal-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-body {
+            color: white;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            .nav2-list-mobile {
+                padding: 10px;
+                list-style: none;
+                .nav2-list-item-mobile {
+                    a {
+                        color: white;
+                        display: block;
+                        width: 100%;
+                        padding: 15px 0;
+                        font-size: 1.6rem;
+                    }
+                    &:hover {
+                        background-color: #323131;
+                    }
+                }
+            }
+
+            .close-icon {
+                color: white;
+                font-size: 5rem;
+                padding: 10px;
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+            .close-icon:hover {
+                background-color: #323131;
+            }
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+}
+
+/*tablet*/
+@media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .Header-Wrapper {
+        display: none;
+    }
+
+    .Header-Wrapper-mobile {
+        background-color: #000000;
+        height: 240px;
+        position: relative;
+        display: block;
+
+        padding: 5px 15px;
+        .Header-mobile-nav {
+            display: flex;
+            justify-content: space-between;
+            color: white;
+            height: 50%;
+            align-items: center;
+            .Header-mobile-bars {
+                font-size: 6.8rem;
+            }
+
+            .Header-mobile-logo {
+                height: 100%;
+                display: flex;
+                align-items: center;
+                .header-mobile-logo-img {
+                    height: 60%;
+                    object-fit: cover;
+                }
+                .Header-mobile-logo-title {
+                    font-size: 4.8rem;
+                }
+            }
+            .Header-mobile-user {
+                font-size: 6.8rem;
+            }
+        }
+    }
+
+    .modal-mobile {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: 99;
+        top: 0;
+
+        animation: fadeIn linear 0.1s;
+
+        &.open {
+            display: block;
+        }
+
+        .modal-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-body {
+            background-color: black;
+
+            color: white;
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            .nav2-list-mobile {
+                padding: 30px;
+                list-style: none;
+                .nav2-list-item-mobile {
+                    a {
+                        color: white;
+                        display: block;
+                        width: 100%;
+                        padding: 15px 0;
+                        font-size: 2.6rem;
+                    }
+                    &:hover {
+                        background-color: #323131;
+                    }
+                }
+            }
+
+            .close-icon {
+                color: white;
+                font-size: 10rem;
+                padding: 10px;
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+            .close-icon:hover {
+                background-color: #323131;
+            }
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
         }
     }
 }

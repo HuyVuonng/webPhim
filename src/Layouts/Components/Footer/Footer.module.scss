@@ -69,3 +69,17 @@
         }
     }
 }
+/*mobile*/
+@media only screen and (max-width: 46.1875em) {
+    .footer-wrapper {
+        .footer-content {
+            .footer-content-nav,
+            .footer-aboutUS {
+                .footer-nav-list {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+        }
+    }
+}
