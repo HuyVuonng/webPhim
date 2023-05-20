@@ -16,6 +16,7 @@ function Search() {
     const [searchDebount, setSearchDebount] = useState();
     const idTimeOut = useRef();
     const navigate = useNavigate();
+
     const debount = (value, timeout) => {
         clearTimeout(idTimeOut.current);
         idTimeOut.current = setTimeout(() => {
@@ -38,7 +39,7 @@ function Search() {
         getSearchValue();
     }, [debountValue]);
 
-    const handleSearch = (e) => {
+    const handleSearchType = (e) => {
         // Khong cho nhap dau cach dau tien trong o tim kiem
         if (!e.target.value.startsWith(' ') || e.target.value.trim()) {
             setSearchInput(e.target.value);
@@ -51,14 +52,18 @@ function Search() {
 
     const handleSearchBtn = () => {
         if (debountValue) {
+            setShowResults(false);
             navigate(`/search/${debountValue}?page=1`);
             setSearchInput('');
         }
     };
     const handleEnterPress = (e) => {
         if (e.keyCode === 13) {
-            navigate(`/search/${debountValue}?page=1`);
-            setSearchInput('');
+            if (searchInput) {
+                setShowResults(false);
+                navigate(`/search/${searchInput}?page=1`);
+                setSearchInput('');
+            }
         }
     };
     return (
@@ -121,7 +126,7 @@ function Search() {
                             type="text"
                             value={searchInput}
                             onFocus={() => setShowResults(true)}
-                            onChange={handleSearch}
+                            onChange={handleSearchType}
                             className={cx('search-input')}
                             placeholder="Enter your keywords..."
                             onKeyUp={handleEnterPress}

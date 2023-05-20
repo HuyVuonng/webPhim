@@ -48,6 +48,7 @@ function Home() {
         const width = document.body.clientWidth;
         const soItem = Math.floor(width / 200);
         const box = document.querySelectorAll(`.${cx('Home-content-list-movie')}`);
+        //number of item movie show in device
         for (let i = 0; i < box.length; i++) {
             box[i].style.gridTemplateColumns = `repeat(${soItem}, 1fr)`;
         }

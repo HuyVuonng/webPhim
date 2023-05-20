@@ -88,9 +88,9 @@
                 }
                 .search-value-list-item-infor {
                     display: flex;
-                    height: 20px;
+                    height: fit-content;
                     margin-top: 5px;
-                    align-items: center;
+                    align-items: baseline;
                     font-size: 1.2rem;
                     color: #6c757d;
 
@@ -98,6 +98,7 @@
                         width: 5px;
                         height: 5px;
                         border-radius: 50%;
+                        align-self: center;
                         background-color: #6c757d;
                         margin: 0 5px;
                     }

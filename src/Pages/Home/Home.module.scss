@@ -67,3 +67,24 @@
         }
     }
 }
+
+/*mobile*/
+@media only screen and (max-width: 46.1875em) {
+    .Home-wrapper {
+        .Home-content {
+            .Home-content-block {
+                .Home-lable-wrapper {
+                    flex-direction: column;
+                    align-items: flex-start;
+
+                    .Home-tag-btn-wrapper {
+                        margin-top: 30px;
+                    }
+                }
+                // .Home-content-list-movie {
+                //     grid-template-columns: repeat(1, 1fr) !important;
+                // }
+            }
+        }
+    }
+}

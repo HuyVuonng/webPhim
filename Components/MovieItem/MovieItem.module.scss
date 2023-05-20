@@ -157,4 +157,16 @@
     .MovieItem-hover-description {
         display: none;
     }
+
+    .movie-item-block {
+        .link {
+            .MovieItem-wrapper {
+                width: 260px;
+
+                .MovieItem-img-wrapper {
+                    height: 380px;
+                }
+            }
+        }
+    }
 }
