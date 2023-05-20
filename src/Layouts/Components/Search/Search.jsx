@@ -1,21 +1,138 @@
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight, faSearch } from '@fortawesome/free-solid-svg-icons';
-
+import { faArrowRight, faSearch, faStar } from '@fortawesome/free-solid-svg-icons';
+import HeadlessTippy from '@tippyjs/react/headless';
+import { useEffect, useRef, useState } from 'react';
+import httpRequest from '../../../httpRequest/httprequest';
+import no_img from './no_img.png';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 const cx = classNames.bind(styles);
 function Search() {
+    const [searchInput, setSearchInput] = useState('');
+    const [searchValue, setSearchValue] = useState([]);
+    const [showResults, setShowResults] = useState(true);
+    const [searchDebount, setSearchDebount] = useState();
+    const idTimeOut = useRef();
+    const navigate = useNavigate();
+    const debount = (value, timeout) => {
+        clearTimeout(idTimeOut.current);
+        idTimeOut.current = setTimeout(() => {
+            setSearchDebount(value);
+        }, timeout);
+        return searchDebount;
+    };
+
+    const debountValue = debount(searchInput, 800);
+    const getSearchValue = async () => {
+        await httpRequest
+            .get('/search/movie', {
+                params: { api_key: import.meta.env.VITE_API_Key, page: 1, query: searchInput },
+            })
+            .then((res) => {
+                setSearchValue(res.data.results);
+            });
+    };
+    useEffect(() => {
+        getSearchValue();
+    }, [debountValue]);
+
+    const handleSearch = (e) => {
+        // Khong cho nhap dau cach dau tien trong o tim kiem
+        if (!e.target.value.startsWith(' ') || e.target.value.trim()) {
+            setSearchInput(e.target.value);
+        }
+    };
+
+    const handleHideResults = () => {
+        setShowResults(false);
+    };
+
+    const handleSearchBtn = () => {
+        if (debountValue) {
+            navigate(`/search/${debountValue}?page=1`);
+            setSearchInput('');
+        }
+    };
+    const handleEnterPress = (e) => {
+        if (e.keyCode === 13) {
+            navigate(`/search/${debountValue}?page=1`);
+            setSearchInput('');
+        }
+    };
     return (
-        <div className={cx('search-wrapper')}>
-            <div className={cx('search-box')}>
-                <FontAwesomeIcon icon={faSearch} className={cx('searchIcon')} />
+        <div>
+            <HeadlessTippy
+                interactive
+                visible={showResults && searchValue.length > 0}
+                placement="bottom-start"
+                render={(attrs) => (
+                    <ul className={cx('search-value-list')} tabIndex="-1" {...attrs}>
+                        {searchValue.map(
+                            (item, index) =>
+                                index < 5 && (
+                                    <Link to="/" key={index} className={cx('search-value-list-item-link')}>
+                                        <li key={index} className={cx('search-value-list-item')}>
+                                            <div className={cx('search-value-list-item-img-wrapper')}>
+                                                <img
+                                                    className={cx('search-value-list-item-img')}
+                                                    src={
+                                                        item.poster_path
+                                                            ? `https://image.tmdb.org/t/p/original${item.poster_path}`
+                                                            : no_img
+                                                    }
+                                                />
+                                            </div>
+                                            <div className={cx('search-value-list-item-description')}>
+                                                <span className={cx('search-value-list-item-name')}>{item.title}</span>
+                                                <div className={cx('search-value-list-item-infor')}>
+                                                    <FontAwesomeIcon icon={faStar} />
+                                                    <span className={cx('search-value-list-item-infor-rate')}>
+                                                        {item.vote_average}
+                                                    </span>
+                                                    <div className={cx('search-value-list-item-dot')}></div>
+                                                    <span className={cx('search-value-list-item-infor-year')}>
+                                                        {(() => {
+                                                            if (item.release_date) {
+                                                                return item.release_date.split('-')[0];
+                                                            } else if (item.first_air_date) {
+                                                                return item.first_air_date.split('-')[0];
+                                                            } else {
+                                                                return '';
+                                                            }
+                                                        })()}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </Link>
+                                ),
+                        )}
+                    </ul>
+                )}
+                onClickOutside={handleHideResults}
+            >
+                <div className={cx('search-wrapper')}>
+                    <div className={cx('search-box')}>
+                        <FontAwesomeIcon icon={faSearch} className={cx('searchIcon')} />
 
-                <input type="text" className={cx('search-input')} placeholder="Enter your keywords..." />
-            </div>
+                        <input
+                            type="text"
+                            value={searchInput}
+                            onFocus={() => setShowResults(true)}
+                            onChange={handleSearch}
+                            className={cx('search-input')}
+                            placeholder="Enter your keywords..."
+                            onKeyUp={handleEnterPress}
+                        />
+                    </div>
 
-            <button className={cx('search-btn')}>
-                <FontAwesomeIcon icon={faArrowRight} className={cx('searchIcon-btn')} />
-            </button>
+                    <button className={cx('search-btn')} onClick={handleSearchBtn}>
+                        <FontAwesomeIcon icon={faArrowRight} className={cx('searchIcon-btn')} />
+                    </button>
+                </div>
+            </HeadlessTippy>
         </div>
     );
 }

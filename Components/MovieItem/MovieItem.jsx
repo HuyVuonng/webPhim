@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import HeadlessTippy from '@tippyjs/react/headless';
+import no_img from './no_img.png';
 
 const cx = classNames.bind(styles);
 
@@ -47,7 +48,12 @@ function MovieItem({ data }) {
                 <Link className={cx('link')} to="/">
                     <div className={cx('MovieItem-wrapper')}>
                         <div className={cx('MovieItem-img-wrapper')}>
-                            <img src={`https://image.tmdb.org/t/p/original${data.poster_path}`} alt="" />
+                            <img
+                                src={
+                                    data.poster_path ? `https://image.tmdb.org/t/p/original${data.poster_path}` : no_img
+                                }
+                                alt=""
+                            />
                             <span className={cx('MovieItem-quality')}>HD</span>
                             <div className={cx('MovieItem-hover')}>
                                 <FontAwesomeIcon icon={faPlayCircle} className={cx('MovieItem-Play-iconHover')} />

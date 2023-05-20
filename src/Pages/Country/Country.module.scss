@@ -1,0 +1,65 @@
+.Country-wrapper {
+    padding: 0 30px;
+    .Country-title {
+        color: var(--primary-color);
+        font-size: 2.6rem;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 1px;
+            left: 0;
+            bottom: -15px;
+            background-color: var(--primary-color);
+        }
+    }
+
+    .Country-content {
+        margin-top: 50px;
+        display: grid;
+        justify-items: center;
+        row-gap: 20px;
+    }
+
+    .phantrang {
+        margin-top: 40px;
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+    .phantrang-page {
+        color: black;
+        margin: 5px;
+
+        &.phantrang-PageActive {
+            // border: 1px solid black;
+
+            a {
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                display: inline-block;
+                text-align: center;
+                padding: 0;
+                border-radius: 50%;
+                background-color: var(--primary-color);
+                color: white;
+            }
+        }
+
+        .phantrang-PageLink {
+            display: block;
+            padding: 3px;
+            text-decoration: none;
+            color: black;
+            &:hover {
+                opacity: 0.5;
+            }
+        }
+    }
+}

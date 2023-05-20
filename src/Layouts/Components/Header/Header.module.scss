@@ -12,19 +12,23 @@
         align-items: center;
         justify-content: space-between;
 
-        .Header-logo {
+        .Header-logo-link {
+            display: block;
             height: 100%;
-            display: flex;
-            align-items: center;
-            img {
-                object-fit: cover;
+            .Header-logo {
                 height: 100%;
-            }
-            .Header-logo-title {
-                color: white;
-                display: inline;
-                padding: 0 10px;
-                font-size: 2.2rem;
+                display: flex;
+                align-items: center;
+                img {
+                    object-fit: cover;
+                    height: 100%;
+                }
+                .Header-logo-title {
+                    color: white;
+                    display: inline;
+                    padding: 0 10px;
+                    font-size: 2.2rem;
+                }
             }
         }
 
@@ -47,7 +51,9 @@
 
             .genre-child,
             .country-child {
-                width: 375px;
+                overflow-y: auto;
+                max-width: 50vw;
+                max-height: 50vh;
                 color: black;
                 background-color: white;
                 list-style: none;
@@ -55,7 +61,7 @@
                 display: grid;
                 border-radius: 5px;
                 box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 20px 0px;
-                grid-template-columns: auto auto auto;
+                grid-template-columns: auto auto auto auto auto;
 
                 .genre-child-link,
                 .country-child-link {
@@ -127,15 +133,22 @@
             .Header-mobile-bars {
                 font-size: 3.4rem;
             }
-            .Header-mobile-logo {
+            .Header-mobile-logo-link {
+                display: block;
                 height: 100%;
-                display: flex;
-                align-items: center;
-                .header-mobile-logo-img {
-                    height: 60%;
-                    object-fit: cover;
+                .Header-mobile-logo {
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    color: white;
+
+                    .header-mobile-logo-img {
+                        height: 60%;
+                        object-fit: cover;
+                    }
                 }
             }
+
             .Header-mobile-user {
                 font-size: 3.4rem;
             }
@@ -230,19 +243,24 @@
             .Header-mobile-bars {
                 font-size: 6.8rem;
             }
-
-            .Header-mobile-logo {
+            .Header-mobile-logo-link {
+                display: block;
                 height: 100%;
-                display: flex;
-                align-items: center;
-                .header-mobile-logo-img {
-                    height: 60%;
-                    object-fit: cover;
-                }
-                .Header-mobile-logo-title {
-                    font-size: 4.8rem;
+                .Header-mobile-logo {
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    color: white;
+                    .header-mobile-logo-img {
+                        height: 60%;
+                        object-fit: cover;
+                    }
+                    .Header-mobile-logo-title {
+                        font-size: 4.8rem;
+                    }
                 }
             }
+
             .Header-mobile-user {
                 font-size: 6.8rem;
             }
