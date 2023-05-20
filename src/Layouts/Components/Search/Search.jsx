@@ -15,6 +15,7 @@ function Search() {
     const [showResults, setShowResults] = useState(true);
     const [searchDebount, setSearchDebount] = useState();
     const idTimeOut = useRef();
+    const inputRef = useRef();
     const navigate = useNavigate();
 
     const debount = (value, timeout) => {
@@ -52,6 +53,7 @@ function Search() {
 
     const handleSearchBtn = () => {
         if (debountValue) {
+            inputRef.current.blur();
             setShowResults(false);
             navigate(`/search/${debountValue}?page=1`);
             setSearchInput('');
@@ -60,6 +62,7 @@ function Search() {
     const handleEnterPress = (e) => {
         if (e.keyCode === 13) {
             if (searchInput) {
+                inputRef.current.blur();
                 setShowResults(false);
                 navigate(`/search/${searchInput}?page=1`);
                 setSearchInput('');
@@ -123,6 +126,7 @@ function Search() {
                         <FontAwesomeIcon icon={faSearch} className={cx('searchIcon')} />
 
                         <input
+                            ref={inputRef}
                             type="text"
                             value={searchInput}
                             onFocus={() => setShowResults(true)}
