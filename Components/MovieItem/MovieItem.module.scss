@@ -1,10 +1,7 @@
 .movie-item-block {
-    width: fit-content;
-
     .link {
-        display: inline-block;
         .MovieItem-wrapper {
-            width: 172px;
+            // width: 172px;
 
             &:hover .MovieItem-img-wrapper > .MovieItem-hover {
                 display: block;
@@ -57,10 +54,15 @@
 
             .MovieItem-description {
                 .MovieItem-name {
+                    // overflow: hidden;
+                    // text-overflow: ellipsis;
+                    // white-space: nowrap;
+                    line-height: 3rem;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
                     overflow: hidden;
                     text-overflow: ellipsis;
-                    white-space: nowrap;
-                    line-height: 3rem;
                 }
 
                 .MovieItem-infor {
@@ -156,17 +158,5 @@
 @media only screen and (max-width: 46.1875em) {
     .MovieItem-hover-description {
         display: none;
-    }
-
-    .movie-item-block {
-        .link {
-            .MovieItem-wrapper {
-                width: 260px;
-
-                .MovieItem-img-wrapper {
-                    height: 380px;
-                }
-            }
-        }
     }
 }

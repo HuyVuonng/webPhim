@@ -28,7 +28,7 @@ function Country() {
     useEffect(() => {
         document.title = 'Countrys';
         const width = document.body.clientWidth;
-        const soItem = Math.floor(width / 200);
+        const soItem = Math.floor(width / 172);
         const box = document.querySelectorAll(`.${cx('Country-content')}`);
         for (let i = 0; i < box.length; i++) {
             box[i].style.gridTemplateColumns = `repeat(${soItem}, 1fr)`;

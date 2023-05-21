@@ -3,26 +3,27 @@ import styles from './Header.module.scss/';
 import HeadlessTippy from '@tippyjs/react/headless';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faTimes, faUser, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight, faBars, faTimes, faUser, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import Search from '../Search/Search';
 import { useEffect, useState } from 'react';
 import httpRequest from '../../../httpRequest/httprequest';
 
 const cx = classNames.bind(styles);
 function Header() {
-    const [countries, setCountries] = useState([]);
+    // const [countries, setCountries] = useState([]);
     const [genre, setGenre] = useState([]);
 
     const getnav = async () => {
-        await httpRequest
-            .get('/configuration/countries', { params: { api_key: import.meta.env.VITE_API_Key } })
-            .then((res) => setCountries(res.data));
+        // await httpRequest
+        //     .get('/configuration/countries', { params: { api_key: import.meta.env.VITE_API_Key } })
+        //     .then((res) => setCountries(res.data));
 
         let movieGenres = await httpRequest.get('/genre/movie/list', {
             params: { api_key: import.meta.env.VITE_API_Key },
         });
         let tvGenres = await httpRequest.get('/genre/tv/list', { params: { api_key: import.meta.env.VITE_API_Key } });
 
+        console.log(movieGenres.data.genres);
         setGenre([...movieGenres.data.genres, ...tvGenres.data.genres]);
     };
     useEffect(() => {
@@ -57,46 +58,46 @@ function Header() {
     //     'Wester',
     // ];
 
-    // const countrys = [
-    //     'Argentina',
-    //     'Australia',
-    //     'Austria',
-    //     'Belgium',
-    //     'Brazil',
-    //     'Canada',
-    //     'China',
-    //     'Czech Republic',
-    //     'Denmark',
-    //     'Finland',
-    //     'France',
-    //     'Germany',
-    //     'Hong Kong',
-    //     'Hungary',
-    //     'India',
-    //     'International',
-    //     'Ireland',
-    //     'Israel',
-    //     'Italy',
-    //     'Japan',
-    //     'Luxembourg',
-    //     'Mexico',
-    //     'Netherlands',
-    //     'New Zealand',
-    //     'Norway',
-    //     'Philippines',
-    //     'Poland',
-    //     'Romania',
-    //     'Russia',
-    //     'South Africa',
-    //     'South Korea',
-    //     'Spain',
-    //     'Sweden',
-    //     'Switzerland',
-    //     'Thailand',
-    //     'Turkey',
-    //     'United Kingdom',
-    //     'United States',
-    // ];
+    const countries = [
+        'Argentina',
+        'Australia',
+        'Austria',
+        'Belgium',
+        'Brazil',
+        'Canada',
+        'China',
+        'Czech Republic',
+        'Denmark',
+        'Finland',
+        'France',
+        'Germany',
+        'Hong Kong',
+        'Hungary',
+        'India',
+        'International',
+        'Ireland',
+        'Israel',
+        'Italy',
+        'Japan',
+        'Luxembourg',
+        'Mexico',
+        'Netherlands',
+        'New Zealand',
+        'Norway',
+        'Philippines',
+        'Poland',
+        'Romania',
+        'Russia',
+        'South Africa',
+        'South Korea',
+        'Spain',
+        'Sweden',
+        'Switzerland',
+        'Thailand',
+        'Turkey',
+        'United Kingdom',
+        'United States',
+    ];
     const show = () => {
         const modalMobile = document.getElementById('modal-mobile');
         modalMobile.classList.add(`${cx('open')}`);
@@ -105,8 +106,15 @@ function Header() {
         const modalMobile = document.getElementById('modal-mobile');
         modalMobile.classList.remove(`${cx('open')}`);
     }
+
+    const showSubnav = (e) => {
+        e.target.childNodes[1].classList.toggle(`${cx('rotate')}`);
+        // e.target.pa.classList.toggle(`${cx('show')}`);
+        e.target.parentElement.childNodes[1].classList.toggle(`${cx('show')}`);
+    };
     return (
         <>
+            {/* pc */}
             <div className={cx('Header-Wrapper')}>
                 <nav className={cx('Header-nav')}>
                     <Link to="/" className={cx('Header-logo-link')}>
@@ -147,13 +155,13 @@ function Header() {
                                 placement="bottom-start"
                                 render={(attrs) => (
                                     <ul className={cx('country-child')} tabIndex="-1" {...attrs}>
-                                        {countries.map((item) => (
+                                        {countries.map((item, index) => (
                                             <Link
-                                                key={item.iso_3166_1}
-                                                to={`/country/${item.english_name}?page=1`}
+                                                key={index}
+                                                to={`/country/${item}?page=1`}
                                                 className={cx('country-child-link')}
                                             >
-                                                <li className={cx('country-child-item')}>{item.english_name}</li>
+                                                <li className={cx('country-child-item')}>{item}</li>
                                             </Link>
                                         ))}
                                     </ul>
@@ -214,12 +222,49 @@ function Header() {
                         <li className={cx('nav2-list-item-mobile')} onClick={close}>
                             <Link to="/">HOME</Link>
                         </li>
-                        <li className={cx('nav2-list-item-mobile')} onClick={close}>
-                            <Link to="/">GENRE</Link>
+                        <li className={cx('nav2-list-item-mobile', 'no-link')}>
+                            <span className={cx('nav2-list-item-mobile-title')} onClick={showSubnav}>
+                                GENRE
+                                <FontAwesomeIcon
+                                    icon={faAngleRight}
+                                    className={cx('nav2-list-item-mobile-AngleRight-icon')}
+                                />
+                            </span>
+
+                            <ul className={cx('subnav2-list-item-mobile-wrapper')}>
+                                {genre.map((item, index) => (
+                                    <Link
+                                        key={index}
+                                        to={`/genre/${item.name}?page=1`}
+                                        className={cx('sub-child-link')}
+                                    >
+                                        <li className={cx('sub-child-item')} onClick={close}>
+                                            {item.name}
+                                        </li>
+                                    </Link>
+                                ))}
+                            </ul>
                         </li>
-                        <li className={cx('nav2-list-item-mobile')} onClick={close}>
-                            <Link to="/">COUNTRY</Link>
+
+                        <li className={cx('nav2-list-item-mobile', 'no-link')}>
+                            <span className={cx('nav2-list-item-mobile-title')} onClick={showSubnav}>
+                                COUNTRY
+                                <FontAwesomeIcon
+                                    icon={faAngleRight}
+                                    className={cx('nav2-list-item-mobile-AngleRight-icon')}
+                                />
+                            </span>
+                            <ul className={cx('subnav2-list-item-mobile-wrapper')}>
+                                {countries.map((item, index) => (
+                                    <Link key={index} to={`/country/${item}?page=1`} className={cx('sub-child-link')}>
+                                        <li className={cx('sub-child-item')} onClick={close}>
+                                            {item}
+                                        </li>
+                                    </Link>
+                                ))}
+                            </ul>
                         </li>
+
                         <li className={cx('nav2-list-item-mobile')} onClick={close}>
                             <Link to="/movie?page=1">MOVIES</Link>
                         </li>

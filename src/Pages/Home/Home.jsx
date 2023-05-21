@@ -45,10 +45,10 @@ function Home() {
     useEffect(() => {
         window.scrollTo(0, 0);
         document.title = 'Home';
-        const width = document.body.clientWidth;
-        const soItem = Math.floor(width / 200);
-        const box = document.querySelectorAll(`.${cx('Home-content-list-movie')}`);
         //number of item movie show in device
+        const width = document.body.clientWidth;
+        const soItem = Math.floor(width / 172);
+        const box = document.querySelectorAll(`.${cx('Home-content-list-movie')}`);
         for (let i = 0; i < box.length; i++) {
             box[i].style.gridTemplateColumns = `repeat(${soItem}, 1fr)`;
         }

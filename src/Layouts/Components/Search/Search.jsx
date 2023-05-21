@@ -38,10 +38,11 @@ function Search() {
     };
     useEffect(() => {
         getSearchValue();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [debountValue]);
 
     const handleSearchType = (e) => {
-        // Khong cho nhap dau cach dau tien trong o tim kiem
+        // deny type space first in input search
         if (!e.target.value.startsWith(' ') || e.target.value.trim()) {
             setSearchInput(e.target.value);
         }

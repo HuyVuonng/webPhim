@@ -25,7 +25,7 @@ function Movie() {
     useEffect(() => {
         document.title = 'Movies';
         const width = document.body.clientWidth;
-        const soItem = Math.floor(width / 200);
+        const soItem = Math.floor(width / 172);
         const box = document.querySelectorAll(`.${cx('Movie-content')}`);
         for (let i = 0; i < box.length; i++) {
             box[i].style.gridTemplateColumns = `repeat(${soItem}, 1fr)`;
