@@ -53,10 +53,10 @@ function Search() {
     };
 
     const handleSearchBtn = () => {
-        if (debountValue) {
+        if (searchInput) {
             inputRef.current.blur();
             setShowResults(false);
-            navigate(`/search/${debountValue}?page=1`);
+            navigate(`/search/${searchInput}?page=1`);
             setSearchInput('');
         }
     };
