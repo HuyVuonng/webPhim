@@ -39,13 +39,13 @@ function MovieItem({ data }) {
                         </div>
                         <p className={cx('MovieItem-hover-description-summary')}>{data.overview}</p>
 
-                        <Link to="/" className={cx('watch')}>
+                        <Link to={`/watch/${data.id}`} className={cx('watch')}>
                             Watch now
                         </Link>
                     </div>
                 )}
             >
-                <Link className={cx('link')} to="/">
+                <Link className={cx('link')} to={`/watch/${data.id}`}>
                     <div className={cx('MovieItem-wrapper')}>
                         <div className={cx('MovieItem-img-wrapper')}>
                             <img

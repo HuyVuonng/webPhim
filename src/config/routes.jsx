@@ -4,6 +4,7 @@ const routes = {
     genre: '/genre/:slug',
     country: '/country/:slug',
     search: '/search/:slug',
+    watch: '/watch/:idfilm',
     home: '/',
 };
 

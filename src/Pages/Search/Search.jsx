@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import httpRequest from '../../httpRequest/httprequest';
 import MovieItem from '../../../Components/MovieItem/MovieItem';
 import ReactPaginate from 'react-paginate';
@@ -13,7 +13,7 @@ function Search() {
     const params = useParams();
     const [searchParams, setSearchParams] = useSearchParams({});
     let currentPage = searchParams.get('page');
-    window.scrollTo(0, 0);
+    const isfirst = useRef(true);
 
     const getData = async () => {
         await httpRequest
@@ -36,7 +36,16 @@ function Search() {
     }, []);
 
     useEffect(() => {
-        getData();
+        if (isfirst.current) {
+            getData();
+            window.scrollTo(0, 0);
+
+            isfirst.current = false;
+
+            setTimeout(() => {
+                isfirst.current = true;
+            }, 1000);
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentPage, params]);
 

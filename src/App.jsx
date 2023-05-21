@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { publicRoutes } from './routes';
 import DefaultLayout from './Layouts/DefaultLayout';
-import { Fragment } from 'react';
+import { Fragment, Suspense } from 'react';
 function App() {
     return (
         <Router>
@@ -22,7 +22,9 @@ function App() {
                                 path={route.path}
                                 element={
                                     <Layout>
-                                        <Page />
+                                        <Suspense fallback={<div>Loading...</div>}>
+                                            <Page />
+                                        </Suspense>
                                     </Layout>
                                 }
                             />
