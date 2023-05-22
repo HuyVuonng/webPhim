@@ -16,32 +16,68 @@ function Watch() {
     const [movieRecomment, setMovieRecomment] = useState([]);
     const isfirst = useRef(true);
 
-    const getData = () => {
+    const getData = async () => {
         setMovie([]);
-        Promise.all([
-            httpRequest.get(`/movie/${params.idfilm}`, { params: { api_key: import.meta.env.VITE_API_Key } }),
-            httpRequest.get(`/movie/${params.idfilm}/videos`, {
+        let check;
+        try {
+            await httpRequest.get(`/movie/${params.idfilm}`, {
                 params: { api_key: import.meta.env.VITE_API_Key },
-            }),
-            httpRequest.get(`/movie/${params.idfilm}/credits`, {
-                params: { api_key: import.meta.env.VITE_API_Key },
-            }),
-            httpRequest.get(`/movie/${params.idfilm}/keywords`, {
-                params: { api_key: import.meta.env.VITE_API_Key },
-            }),
-            httpRequest.get(`/movie/${params.idfilm}/similar`, {
-                params: { api_key: import.meta.env.VITE_API_Key },
-            }),
-        ]).then(([filmdetail, idYT, cast, keywords, recommend]) => {
-            const newData = { ...filmdetail.data };
-            const id = idYT.data.results.find((item) => item.type === 'Trailer');
-            id ? (newData.idYT = id.key) : (newData.idYT = '');
-            cast.data.cast ? (newData.cast = cast.data.cast) : (newData.cast = '');
-            keywords.data.keywords ? (newData.keywords = keywords.data.keywords) : (newData.keywords = '');
-            document.title = newData.original_title;
-            setMovieRecomment(recommend.data.results);
-            setMovie(newData);
-        });
+            });
+        } catch (error) {
+            check = error.response.status;
+        }
+        if (check !== 404) {
+            Promise.all([
+                httpRequest.get(`/movie/${params.idfilm}`, { params: { api_key: import.meta.env.VITE_API_Key } }),
+                httpRequest.get(`/movie/${params.idfilm}/videos`, {
+                    params: { api_key: import.meta.env.VITE_API_Key },
+                }),
+                httpRequest.get(`/movie/${params.idfilm}/credits`, {
+                    params: { api_key: import.meta.env.VITE_API_Key },
+                }),
+                httpRequest.get(`/movie/${params.idfilm}/keywords`, {
+                    params: { api_key: import.meta.env.VITE_API_Key },
+                }),
+                httpRequest.get(`/movie/${params.idfilm}/similar`, {
+                    params: { api_key: import.meta.env.VITE_API_Key },
+                }),
+            ]).then(([filmdetail, idYT, cast, keywords, recommend]) => {
+                const newData = { ...filmdetail.data };
+                const id = idYT.data.results.find((item) => item.type === 'Trailer');
+                id ? (newData.idYT = id.key) : (newData.idYT = '');
+                cast.data.cast ? (newData.cast = cast.data.cast) : (newData.cast = '');
+                keywords.data.keywords ? (newData.keywords = keywords.data.keywords) : (newData.keywords = '');
+                document.title = newData.original_title;
+                setMovieRecomment(recommend.data.results);
+                setMovie(newData);
+            });
+        } else {
+            Promise.all([
+                httpRequest.get(`/tv/${params.idfilm}`, { params: { api_key: import.meta.env.VITE_API_Key } }),
+                httpRequest.get(`/tv/${params.idfilm}/videos`, {
+                    params: { api_key: import.meta.env.VITE_API_Key },
+                }),
+                httpRequest.get(`/tv/${params.idfilm}/credits`, {
+                    params: { api_key: import.meta.env.VITE_API_Key },
+                }),
+                httpRequest.get(`/tv/${params.idfilm}/keywords`, {
+                    params: { api_key: import.meta.env.VITE_API_Key },
+                }),
+                httpRequest.get(`/tv/${params.idfilm}/similar`, {
+                    params: { api_key: import.meta.env.VITE_API_Key },
+                }),
+            ]).then(([tvdetail, idYTTV, cast, keywords, recommend]) => {
+                const newData = { ...tvdetail.data };
+                console.log(newData);
+                const id = idYTTV.data.results.find((item) => item.type === 'Trailer');
+                id ? (newData.idYT = id.key) : (newData.idYT = '');
+                cast.data.cast ? (newData.cast = cast.data.cast) : (newData.cast = '');
+                keywords.data.results ? (newData.keywords = keywords.data.results) : (newData.keywords = '');
+                document.title = newData.original_name;
+                setMovieRecomment(recommend.data.results);
+                setMovie(newData);
+            });
+        }
     };
 
     useEffect(() => {
@@ -73,7 +109,7 @@ function Watch() {
     };
     return (
         <div className={cx('Watch-wrapper')}>
-            <h3>{movie.original_title}</h3>
+            <h3>{movie.original_title || movie.original_name}</h3>
             <div className={cx('Watch-video-Wrapper')}>
                 <iframe
                     id="Watch-iframe"
@@ -103,17 +139,21 @@ function Watch() {
                         />
                     </div>
                     <div className={cx('Watch-video-infor')}>
-                        <h1 className={cx('Watch-video-infor-name')}>{movie.original_title}</h1>
+                        <h1 className={cx('Watch-video-infor-name')}>{movie.original_title || movie.original_name}</h1>
                         <div className={cx('Watch-video-infor-start-duration')}>
                             <FontAwesomeIcon icon={faStar} /> {movie.vote_average}
-                            <span className={cx('Watch-video-infor-duration')}>{movie.runtime}min</span>
+                            <span className={cx('Watch-video-infor-duration')}>
+                                {movie.runtime ? movie.runtime + ' min' : ''}
+                            </span>
                         </div>
                         <p className={cx('Watch-video-infor-overview')}>{movie.overview}</p>
 
                         <div className={cx('Watch-video-more-infor')}>
                             <div className={cx('Watch-video-more-infor-item')}>
                                 <span className={cx('Watch-video-more-infor-title')}>Released:</span>
-                                <span className={cx('Watch-video-more-infor-content')}>{movie.release_date}</span>
+                                <span className={cx('Watch-video-more-infor-content')}>
+                                    {movie.release_date || movie.first_air_date}
+                                </span>
                             </div>
                             <div className={cx('Watch-video-more-infor-item')}>
                                 <span className={cx('Watch-video-more-infor-title')}>Genres:</span>
