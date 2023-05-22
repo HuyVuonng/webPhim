@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
-import styles from './Search.module.scss';
+import styles from './SmallSearch.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight, faSearch, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faStar } from '@fortawesome/free-solid-svg-icons';
 import HeadlessTippy from '@tippyjs/react/headless';
 import { useEffect, useRef, useState } from 'react';
 import httpRequest from '../../../httpRequest/httprequest';
@@ -9,7 +9,7 @@ import no_img from './no_img.png';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 const cx = classNames.bind(styles);
-function Search() {
+function SmallSearch() {
     const [searchInput, setSearchInput] = useState('');
     const [searchValue, setSearchValue] = useState([]);
     const [showResults, setShowResults] = useState(true);
@@ -26,7 +26,7 @@ function Search() {
         return searchDebount;
     };
 
-    const debountValue = debount(searchInput, 800);
+    let debountValue = debount(searchInput, 800);
     const getSearchValue = async () => {
         await httpRequest
             .get('/search/movie', {
@@ -52,14 +52,6 @@ function Search() {
         setShowResults(false);
     };
 
-    const handleSearchBtn = () => {
-        if (searchInput) {
-            inputRef.current.blur();
-            setShowResults(false);
-            navigate(`/search/${searchInput}?page=1`);
-            setSearchInput('');
-        }
-    };
     const handleEnterPress = (e) => {
         if (e.keyCode === 13) {
             if (searchInput) {
@@ -79,7 +71,7 @@ function Search() {
             <HeadlessTippy
                 interactive
                 visible={showResults && searchValue.length > 0}
-                placement="bottom-start"
+                placement="bottom"
                 render={(attrs) => (
                     <ul className={cx('search-value-list')} tabIndex="-1" {...attrs}>
                         {searchValue.map(
@@ -137,7 +129,6 @@ function Search() {
                 <div className={cx('search-wrapper')}>
                     <div className={cx('search-box')}>
                         <FontAwesomeIcon icon={faSearch} className={cx('searchIcon')} />
-
                         <input
                             ref={inputRef}
                             type="text"
@@ -149,14 +140,10 @@ function Search() {
                             onKeyUp={handleEnterPress}
                         />
                     </div>
-
-                    <button className={cx('search-btn')} onClick={handleSearchBtn}>
-                        <FontAwesomeIcon icon={faArrowRight} className={cx('searchIcon-btn')} />
-                    </button>
                 </div>
             </HeadlessTippy>
         </div>
     );
 }
 
-export default Search;
+export default SmallSearch;

@@ -14,19 +14,36 @@ const cx = classNames.bind(styles);
 function Home() {
     const isFirst = useRef(true);
     const dispatch = useDispatch();
+    const previousBTN = useRef(0);
+    const tagBtnList = useRef();
 
     let ListMovieShowRecomment = useSelector((state) => state.ListMovie);
 
     const [ShowRecomment, setShowRecomment] = useState(ListMovieShowRecomment.MovieHomeListRecomment);
 
-    const handleClickaddClassActive = (e) => {
-        const tagBtnList = document.querySelectorAll(`.${cx('Home-tag-btn')}`);
-        for (let i = 0; i < tagBtnList.length; i++) {
-            tagBtnList[i].classList.remove(`${cx('active')}`);
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        document.title = 'Home';
+        tagBtnList.current = document.querySelectorAll(`.${cx('Home-tag-btn')}`);
+        //number of item movie show in device
+        const width = document.body.clientWidth;
+        const soItem = Math.floor(width / 172);
+        const box = document.querySelectorAll(`.${cx('Home-content-list-movie')}`);
+        for (let i = 0; i < box.length; i++) {
+            box[i].style.gridTemplateColumns = `repeat(${soItem}, 1fr)`;
         }
-        e.target.classList.add(`${cx('active')}`);
+    }, []);
 
-        console.log(e.target.innerText);
+    const handleClickaddClassActive = (e) => {
+        // for (let i = 0; i < tagBtnList.current.length; i++) {
+        //     tagBtnList.current[i].classList.remove(`${cx('active')}`);
+        // }
+        // e.target.classList.add(`${cx('active')}`);
+
+        // console.log(e.target.innerText);
+        tagBtnList.current[previousBTN.current].classList.remove(`${cx('active')}`);
+        e.target.classList.add(`${cx('active')}`);
+        previousBTN.current = e.target.dataset.index;
         switch (e.target.innerText) {
             case ' Movies':
                 setShowRecomment(ListMovieShowRecomment.MovieHomeListRecomment);
@@ -41,18 +58,6 @@ function Home() {
                 break;
         }
     };
-
-    useEffect(() => {
-        window.scrollTo(0, 0);
-        document.title = 'Home';
-        //number of item movie show in device
-        const width = document.body.clientWidth;
-        const soItem = Math.floor(width / 172);
-        const box = document.querySelectorAll(`.${cx('Home-content-list-movie')}`);
-        for (let i = 0; i < box.length; i++) {
-            box[i].style.gridTemplateColumns = `repeat(${soItem}, 1fr)`;
-        }
-    }, []);
 
     const getData = async () => {
         await httpRequest.get('/movie/popular', { params: { api_key: import.meta.env.VITE_API_Key } }).then((res) => {
@@ -85,14 +90,18 @@ function Home() {
                     <div className={cx('Home-lable-wrapper')}>
                         <h2 className={cx('Home-title')}>Recommended</h2>
                         <div className={cx('Home-tag-btn-wrapper')}>
-                            <button className={cx('Home-tag-btn', 'active')} onClick={handleClickaddClassActive}>
-                                <FontAwesomeIcon icon={faPlayCircle} /> Movies
+                            <button
+                                className={cx('Home-tag-btn', 'active')}
+                                data-index={0}
+                                onClick={handleClickaddClassActive}
+                            >
+                                <FontAwesomeIcon icon={faPlayCircle} style={{ pointerEvents: 'none' }} /> Movies
                             </button>
                             {/* <button className={cx('Home-tag-btn')} onClick={handleClickaddClassActive}>
                                 <FontAwesomeIcon icon={faList} /> TV Shows
                             </button> */}
-                            <button className={cx('Home-tag-btn')} onClick={handleClickaddClassActive}>
-                                <FontAwesomeIcon icon={faChartLine} /> Trending
+                            <button className={cx('Home-tag-btn')} data-index={1} onClick={handleClickaddClassActive}>
+                                <FontAwesomeIcon icon={faChartLine} style={{ pointerEvents: 'none' }} /> Trending
                             </button>
                         </div>
                     </div>

@@ -23,7 +23,6 @@ function Header() {
         });
         let tvGenres = await httpRequest.get('/genre/tv/list', { params: { api_key: import.meta.env.VITE_API_Key } });
 
-        console.log(movieGenres.data.genres);
         setGenre([...movieGenres.data.genres, ...tvGenres.data.genres]);
     };
     useEffect(() => {

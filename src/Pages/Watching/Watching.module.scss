@@ -1,0 +1,213 @@
+.Watch-wrapper {
+    background-color: #e3f1f4;
+    h3 {
+        padding: 20px 30px;
+        font-size: 1.6rem;
+        font-weight: normal;
+    }
+    .Watch-video-Wrapper {
+        height: 100vh;
+        position: relative;
+        .Watch-iframe {
+            width: 100%;
+            height: 100%;
+        }
+        .Watch-video-img {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            &.remove {
+                display: none;
+            }
+
+            &:hover .Watch-video-img-hover {
+                display: block;
+            }
+            .Watch-video-img-hover {
+                display: none;
+                cursor: pointer;
+                position: absolute;
+                top: 0;
+                z-index: 5;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background-color: rgba(0, 0, 0, 0.5);
+                .Watch-video-img-Play-iconHover {
+                    color: var(--primary-color);
+                    background-color: white;
+                    border-radius: 50%;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    font-size: 5rem;
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+
+    .Watch-video-infor-wrapper {
+        padding: 20px 30px;
+        .Watch-video-infor-content {
+            display: flex;
+            background-color: white;
+            padding: 20px 35px;
+            .Watch-video-infor-img-wraper {
+                width: 20%;
+                height: 100%;
+                padding: 0 20px;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: scale-down;
+                }
+            }
+            .Watch-video-infor {
+                width: 80%;
+                .Watch-video-infor-name {
+                    font-size: 3.6rem;
+                    font-weight: normal;
+                    margin-bottom: 10px;
+                }
+                .Watch-video-infor-start-duration {
+                    font-size: 1.4rem;
+                    font-weight: 400;
+                    .Watch-video-infor-duration {
+                        margin-left: 15px;
+                        font-weight: 100;
+                    }
+                }
+                .Watch-video-infor-overview {
+                    font-size: 1.4rem;
+                    margin-top: 10px;
+                }
+
+                .Watch-video-more-infor {
+                    margin-top: 20px;
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    grid-gap: 15px;
+                    font-size: 1.4rem;
+
+                    .Watch-video-more-infor-item {
+                        display: flex;
+                        .Watch-video-more-infor-title {
+                            font-weight: bold;
+                        }
+                        .Watch-video-more-infor-content {
+                            margin-left: 5px;
+                            display: -webkit-box;
+                            -webkit-line-clamp: 3;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .Watch-video-recomment {
+        padding: 0 30px 90px;
+        .Watch-video-recomment-title {
+            color: var(--primary-color);
+            padding-left: 0;
+            font-size: 2rem;
+        }
+        .Watch-video-recomment-item {
+            display: grid;
+            grid-gap: 20px;
+        }
+    }
+}
+
+/*mobile*/
+@media only screen and (max-width: 46.1875em) {
+}
+
+/*tablet&mobile*/
+@media only screen and (max-width: 63.9375em) {
+    .Watch-wrapper {
+        background-color: #e3f1f4;
+
+        padding: 0 5px;
+        h3 {
+            padding: 40px 5px 10px;
+            font-size: 1.6rem;
+            font-weight: normal;
+        }
+        .Watch-video-Wrapper {
+            height: 50vh;
+            .Watch-video-img {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+
+        .Watch-video-infor-wrapper {
+            padding: 20px 10px;
+            .Watch-video-infor-content {
+                display: flex;
+                background-color: white;
+                padding: 0 20px 30px;
+                .Watch-video-infor-img-wraper {
+                    display: none;
+                }
+
+                .Watch-video-infor {
+                    width: 100%;
+                    .Watch-video-infor-name {
+                        font-size: 3.6rem;
+                        font-weight: normal;
+                        margin-bottom: 10px;
+                    }
+                    .Watch-video-infor-start-duration {
+                        font-size: 1.4rem;
+                        font-weight: 400;
+                        .Watch-video-infor-duration {
+                            margin-left: 15px;
+                            font-weight: 100;
+                        }
+                    }
+                    .Watch-video-infor-overview {
+                        font-size: 1.4rem;
+                        margin-top: 10px;
+                    }
+                    .Watch-video-more-infor {
+                        display: grid;
+                        grid-template-columns: repeat(1, 1fr);
+                        grid-gap: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*tablet*/
+@media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .Watch-wrapper {
+        h3 {
+            padding-top: 60px;
+        }
+    }
+}

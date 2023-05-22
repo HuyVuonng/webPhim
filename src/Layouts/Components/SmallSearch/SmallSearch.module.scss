@@ -1,0 +1,167 @@
+.search-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    .search-box {
+        background-color: white;
+        display: flex;
+        padding: 3px;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+
+        .searchIcon {
+            color: black;
+            font-size: 1.4rem;
+            margin: auto;
+            height: 20px;
+            // padding: 25px;
+        }
+
+        .search-input {
+            border: none;
+            outline: none;
+            font-weight: 100;
+            font-size: 1.4rem;
+            width: 300px;
+            padding: 10px 5px;
+        }
+    }
+}
+
+.search-value-list {
+    width: 20vw;
+    border-radius: 10px;
+    // transform: translate(195px, 5px);
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: white;
+
+    .search-value-list-item-link {
+        display: block;
+        width: 100%;
+        .search-value-list-item {
+            width: 100%;
+            height: 80px;
+            list-style: none;
+            display: flex;
+            padding: 5px 0;
+            .search-value-list-item-img-wrapper {
+                .search-value-list-item-img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+            .search-value-list-item-description {
+                flex: 1;
+                padding: 5px 10px;
+                display: flex;
+                flex-direction: column;
+                .search-value-list-item-name {
+                    font-weight: bold;
+                    font-size: 1.4rem;
+                }
+                .search-value-list-item-infor {
+                    display: flex;
+                    height: fit-content;
+                    margin-top: 5px;
+                    align-items: baseline;
+                    font-size: 1.2rem;
+                    color: #6c757d;
+
+                    .search-value-list-item-dot {
+                        width: 5px;
+                        height: 5px;
+                        border-radius: 50%;
+                        align-self: center;
+                        background-color: #6c757d;
+                        margin: 0 5px;
+                    }
+                }
+            }
+        }
+
+        & + .search-value-list-item-link {
+            border-top: 1px solid;
+        }
+
+        &:hover {
+            background-color: #dee3e8;
+        }
+    }
+}
+
+/*mobile*/
+@media only screen and (max-width: 46.1875em) {
+    .search-wrapper {
+        .search-box {
+            border-radius: 25px;
+            padding-right: 15px;
+            .searchIcon {
+                width: 30px;
+                height: inherit;
+                padding: 10px;
+            }
+
+            .search-input {
+                width: 240px;
+                height: 36px;
+
+                font-size: 1.6rem;
+            }
+        }
+
+        .search-btn {
+            width: 36px;
+            height: inherit;
+
+            border-radius: 10px;
+            margin-left: 10px;
+
+            .searchIcon-btn {
+                font-size: 2.4rem;
+            }
+        }
+    }
+
+    .search-value-list {
+        transform: translate(10%, 5px);
+    }
+}
+
+/*tablet*/
+@media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .search-wrapper {
+        .search-box {
+            border-radius: 25px;
+            padding-right: 15px;
+            .searchIcon {
+                width: 60px;
+                height: inherit;
+                padding: 10px;
+            }
+
+            .search-input {
+                width: 60vw;
+                height: 75px;
+                font-size: 3rem;
+            }
+        }
+
+        .search-btn {
+            width: 65px;
+            height: inherit;
+
+            border-radius: 10px;
+            margin-left: 10px;
+
+            .searchIcon-btn {
+                font-size: 3rem;
+            }
+        }
+    }
+
+    .search-value-list {
+        transform: translate(15%, 5px);
+    }
+}
