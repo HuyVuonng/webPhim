@@ -16,10 +16,10 @@ function Watch() {
     const [movieRecomment, setMovieRecomment] = useState([]);
     const isfirst = useRef(true);
 
-    const getData = async () => {
+    const getData = () => {
         setMovie([]);
         Promise.all([
-            await httpRequest.get(`/movie/${params.idfilm}`, { params: { api_key: import.meta.env.VITE_API_Key } }),
+            httpRequest.get(`/movie/${params.idfilm}`, { params: { api_key: import.meta.env.VITE_API_Key } }),
             httpRequest.get(`/movie/${params.idfilm}/videos`, {
                 params: { api_key: import.meta.env.VITE_API_Key },
             }),
@@ -29,17 +29,17 @@ function Watch() {
             httpRequest.get(`/movie/${params.idfilm}/keywords`, {
                 params: { api_key: import.meta.env.VITE_API_Key },
             }),
-            httpRequest.get(`/movie/${params.idfilm}/recommendations`, {
+            httpRequest.get(`/movie/${params.idfilm}/similar`, {
                 params: { api_key: import.meta.env.VITE_API_Key },
             }),
-        ]).then(([filmdetail, idYT, cast, keywords, recommendations]) => {
+        ]).then(([filmdetail, idYT, cast, keywords, recommend]) => {
             const newData = { ...filmdetail.data };
             const id = idYT.data.results.find((item) => item.type === 'Trailer');
             id ? (newData.idYT = id.key) : (newData.idYT = '');
             cast.data.cast ? (newData.cast = cast.data.cast) : (newData.cast = '');
             keywords.data.keywords ? (newData.keywords = keywords.data.keywords) : (newData.keywords = '');
             document.title = newData.original_title;
-            setMovieRecomment(recommendations.data.results);
+            setMovieRecomment(recommend.data.results);
             setMovie(newData);
         });
     };
