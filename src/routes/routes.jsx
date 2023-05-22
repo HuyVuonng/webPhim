@@ -15,7 +15,7 @@ const TV = React.lazy(() => import('../Pages/TV'));
 const Country = React.lazy(() => import('../Pages/Country'));
 const Genre = React.lazy(() => import('../Pages/Genre'));
 const Search = React.lazy(() => import('../Pages/Search'));
-const Watching = React.lazy(() => import('../Pages/Watching'));
+const Watching = React.lazy(() => import('../Pages/Watching/WatchingFilms'));
 const LayoutWithSmallHeader = React.lazy(() => import('../Layouts/LayoutWithSmallHeader/LayoutWithSmallHeader'));
 
 const publicRoutes = [
