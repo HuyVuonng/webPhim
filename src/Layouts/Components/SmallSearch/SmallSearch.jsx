@@ -3,7 +3,7 @@ import styles from './SmallSearch.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faStar } from '@fortawesome/free-solid-svg-icons';
 import HeadlessTippy from '@tippyjs/react/headless';
-import { useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import httpRequest from '../../../httpRequest/httprequest';
 import no_img from './no_img.png';
 import { Link } from 'react-router-dom';
@@ -146,4 +146,4 @@ function SmallSearch() {
     );
 }
 
-export default SmallSearch;
+export default memo(SmallSearch);

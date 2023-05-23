@@ -4,7 +4,7 @@ import HeadlessTippy from '@tippyjs/react/headless';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import httpRequest from '../../../httpRequest/httprequest';
 import SmallSearch from '../SmallSearch/SmallSearch';
 
@@ -147,4 +147,4 @@ function SmallHeader() {
     );
 }
 
-export default SmallHeader;
+export default memo(SmallHeader);

@@ -8,6 +8,7 @@ import httpRequest from '../../../httpRequest/httprequest';
 import no_img from './no_img.png';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { memo } from 'react';
 const cx = classNames.bind(styles);
 function Search() {
     const [searchInput, setSearchInput] = useState('');
@@ -74,6 +75,7 @@ function Search() {
         setSearchInput('');
         setShowResults(false);
     };
+
     return (
         <div>
             <HeadlessTippy
@@ -159,4 +161,4 @@ function Search() {
     );
 }
 
-export default Search;
+export default memo(Search);

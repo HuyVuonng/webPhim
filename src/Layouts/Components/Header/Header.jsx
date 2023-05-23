@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faBars, faTimes, faUser, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import Search from '../Search/Search';
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import httpRequest from '../../../httpRequest/httprequest';
 
 const cx = classNames.bind(styles);
 function Header() {
     // const [countries, setCountries] = useState([]);
     const [genre, setGenre] = useState([]);
-
+    const isfirst = useRef(true);
     const getnav = async () => {
         // await httpRequest
         //     .get('/configuration/countries', { params: { api_key: import.meta.env.VITE_API_Key } })
@@ -26,7 +26,9 @@ function Header() {
         setGenre([...movieGenres.data.genres, ...tvGenres.data.genres]);
     };
     useEffect(() => {
-        getnav();
+        if (isfirst.current) {
+            getnav();
+        }
     }, []);
 
     // const genre = [
@@ -280,4 +282,4 @@ function Header() {
     );
 }
 
-export default Header;
+export default memo(Header);
