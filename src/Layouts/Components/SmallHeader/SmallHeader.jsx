@@ -34,8 +34,8 @@ function SmallHeader() {
         'Brazil',
         'Canada',
         'China',
-        'Czech Republic',
         'Denmark',
+        'Viet Nam',
         'Finland',
         'France',
         'Germany',
@@ -111,7 +111,7 @@ function SmallHeader() {
                             placement="bottom-start"
                             render={(attrs) => (
                                 <ul className={cx('country-child')} tabIndex="-1" {...attrs}>
-                                    {countries.map((item, index) => (
+                                    {countries.sort().map((item, index) => (
                                         <Link
                                             key={index}
                                             to={`/country/${item}?page=1`}

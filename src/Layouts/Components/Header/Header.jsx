@@ -65,8 +65,8 @@ function Header() {
         'Brazil',
         'Canada',
         'China',
-        'Czech Republic',
         'Denmark',
+        'Viet Nam',
         'Finland',
         'France',
         'Germany',
@@ -254,7 +254,7 @@ function Header() {
                                 />
                             </span>
                             <ul className={cx('subnav2-list-item-mobile-wrapper')}>
-                                {countries.map((item, index) => (
+                                {countries.sort().map((item, index) => (
                                     <Link key={index} to={`/country/${item}?page=1`} className={cx('sub-child-link')}>
                                         <li className={cx('sub-child-item')} onClick={close}>
                                             {item}

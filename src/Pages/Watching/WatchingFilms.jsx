@@ -136,14 +136,15 @@ function WatchingFilms() {
                 isfirst.current = true;
             }, 500);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [params]);
 
     const handleShowVieo = (e) => {
         e.target.parentElement.classList.add(`${cx('remove')}`);
         setMount(true);
         // e.target.parentElement.remove();
-        const iframe = document.getElementById('Watch-iframe');
-        iframe.src += '?rel=0&autoplay=1';
+        // const iframe = document.getElementById('Watch-iframe');
+        // iframe.src += '?rel=0&autoplay=1';
     };
     return (
         <div className={cx('Watch-wrapper')}>

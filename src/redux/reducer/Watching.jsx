@@ -101,7 +101,7 @@ export const fetchKeyWordsTVSHow = createAsyncThunk('watching/fetchKeyWordsTVSHo
     const res = await httpRequest.get(`/tv/${id}/keywords`, {
         params: { api_key: import.meta.env.VITE_API_Key },
     });
-    return res.data.keywords;
+    return res.data.results;
 });
 export const fetchRecommendTVShow = createAsyncThunk('watching/fetchRecommendTVShow', async (id) => {
     const res = await httpRequest.get(`/tv/${id}/similar`, {

@@ -139,7 +139,7 @@ function Home() {
                     <div className={cx('Home-lable-wrapper', 'haveViewAll')}>
                         <h2 className={cx('Home-title')}>TVs</h2>
                         <div className={cx('Home-tag-btn-wrapper')}>
-                            <Link to={'/'} className={cx('ViewAll')}>
+                            <Link to={'/tv?page=1'} className={cx('ViewAll')}>
                                 View All
                                 <FontAwesomeIcon icon={faAngleRight} />
                             </Link>
