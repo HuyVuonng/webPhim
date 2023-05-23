@@ -41,6 +41,9 @@ function SmallSearch() {
         if (isFirst.current) {
             getSearchValue();
             isFirst.current = false;
+            setTimeout(() => {
+                isFirst.current = true;
+            }, 150);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [debountValue]);

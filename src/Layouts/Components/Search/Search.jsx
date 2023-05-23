@@ -43,6 +43,10 @@ function Search() {
         if (isFirst.current) {
             isFirst.current = false;
             getSearchValue();
+
+            setTimeout(() => {
+                isFirst.current = true;
+            }, 150);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [debountValue]);
@@ -61,19 +65,19 @@ function Search() {
 
     const handleSearchBtn = () => {
         if (searchInput) {
+            setSearchInput('');
             inputRef.current.blur();
             setShowResults(false);
             navigate(`/search/${searchInput}?page=1`);
-            setSearchInput('');
         }
     };
     const handleEnterPress = (e) => {
         if (e.keyCode === 13) {
             if (searchInput) {
+                setSearchInput('');
                 inputRef.current.blur();
                 setShowResults(false);
                 navigate(`/search/${searchInput}?page=1`);
-                setSearchInput('');
             }
         }
     };
@@ -87,7 +91,8 @@ function Search() {
             <HeadlessTippy
                 interactive
                 visible={showResults && searchValue.length > 0}
-                placement="bottom-start"
+                placement="bottom"
+                offset={[-30, 10]}
                 render={(attrs) => (
                     <ul className={cx('search-value-list')} tabIndex="-1" {...attrs}>
                         {searchValue.map(
