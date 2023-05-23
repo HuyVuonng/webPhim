@@ -28,6 +28,7 @@ function Header() {
     useEffect(() => {
         if (isfirst.current) {
             getnav();
+            isfirst.current = false;
         }
     }, []);
 

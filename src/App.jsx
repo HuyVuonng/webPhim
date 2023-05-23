@@ -22,11 +22,11 @@ function App() {
                                 key={index}
                                 path={route.path}
                                 element={
-                                    <Suspense fallback={<Loadding />}>
-                                        <Layout>
+                                    <Layout>
+                                        <Suspense fallback={<Loadding />}>
                                             <Page />
-                                        </Layout>{' '}
-                                    </Suspense>
+                                        </Suspense>
+                                    </Layout>
                                 }
                             />
                         );

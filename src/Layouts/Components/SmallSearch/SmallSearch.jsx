@@ -17,6 +17,7 @@ function SmallSearch() {
     const idTimeOut = useRef();
     const inputRef = useRef();
     const navigate = useNavigate();
+    const isFirst = useRef(true);
 
     const debount = (value, timeout) => {
         clearTimeout(idTimeOut.current);
@@ -37,7 +38,10 @@ function SmallSearch() {
             });
     };
     useEffect(() => {
-        getSearchValue();
+        if (isFirst.current) {
+            getSearchValue();
+            isFirst.current = false;
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [debountValue]);
 
@@ -45,6 +49,7 @@ function SmallSearch() {
         // deny type space first in input search
         if (!e.target.value.startsWith(' ') || e.target.value.trim()) {
             setSearchInput(e.target.value);
+            isFirst.current = true;
         }
     };
 

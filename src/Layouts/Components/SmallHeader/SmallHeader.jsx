@@ -4,7 +4,7 @@ import HeadlessTippy from '@tippyjs/react/headless';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { memo, useEffect, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import httpRequest from '../../../httpRequest/httprequest';
 import SmallSearch from '../SmallSearch/SmallSearch';
 
@@ -12,7 +12,7 @@ const cx = classNames.bind(styles);
 
 function SmallHeader() {
     const [genre, setGenre] = useState([]);
-
+    const isFirst = useRef(true);
     const getnav = async () => {
         // await httpRequest
         //     .get('/configuration/countries', { params: { api_key: import.meta.env.VITE_API_Key } })
@@ -67,7 +67,10 @@ function SmallHeader() {
         'United States',
     ];
     useEffect(() => {
-        getnav();
+        if (isFirst.current) {
+            getnav();
+            isFirst.current = false;
+        }
     }, []);
 
     return (

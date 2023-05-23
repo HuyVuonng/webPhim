@@ -1,6 +1,6 @@
 import React from 'react';
 import config from '../config';
-// import LayoutWithSmallHeader from '../Layouts/LayoutWithSmallHeader/LayoutWithSmallHeader';
+import LayoutWithSmallHeader from '../Layouts/LayoutWithSmallHeader/LayoutWithSmallHeader';
 
 // import Home from '../Pages/Home';
 // import Movie from '../Pages/Movie';
@@ -16,7 +16,7 @@ const Country = React.lazy(() => import('../Pages/Country'));
 const Genre = React.lazy(() => import('../Pages/Genre'));
 const Search = React.lazy(() => import('../Pages/Search'));
 const Watching = React.lazy(() => import('../Pages/Watching/WatchingFilms'));
-const LayoutWithSmallHeader = React.lazy(() => import('../Layouts/LayoutWithSmallHeader/LayoutWithSmallHeader'));
+// const LayoutWithSmallHeader = React.lazy(() => import('../Layouts/LayoutWithSmallHeader/LayoutWithSmallHeader'));
 
 const publicRoutes = [
     { path: config.routes.movie, component: Movie },

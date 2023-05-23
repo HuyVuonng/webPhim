@@ -11,13 +11,14 @@ import { useNavigate } from 'react-router-dom';
 import { memo } from 'react';
 const cx = classNames.bind(styles);
 function Search() {
-    const [searchInput, setSearchInput] = useState('');
+    const [searchInput, setSearchInput] = useState();
     const [searchValue, setSearchValue] = useState([]);
     const [showResults, setShowResults] = useState(true);
     const [searchDebount, setSearchDebount] = useState();
     const idTimeOut = useRef();
     const inputRef = useRef();
     const navigate = useNavigate();
+    const isFirst = useRef(true);
 
     const debount = (value, timeout) => {
         clearTimeout(idTimeOut.current);
@@ -37,8 +38,12 @@ function Search() {
                 setSearchValue(res.data.results);
             });
     };
+
     useEffect(() => {
-        getSearchValue();
+        if (isFirst.current) {
+            isFirst.current = false;
+            getSearchValue();
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [debountValue]);
 
@@ -46,6 +51,7 @@ function Search() {
         // deny type space first in input search
         if (!e.target.value.startsWith(' ') || e.target.value.trim()) {
             setSearchInput(e.target.value);
+            isFirst.current = true;
         }
     };
 
@@ -161,4 +167,5 @@ function Search() {
     );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default memo(Search);

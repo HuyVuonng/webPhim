@@ -5,9 +5,13 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faChartLine, faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useRef, useState } from 'react';
-import httpRequest from '../../httpRequest/httprequest';
 import { useDispatch, useSelector } from 'react-redux';
-import ListMovie from '../../redux/reducer/ListMovie';
+import {
+    fetchMovieHomeList,
+    fetchMovieHomeListRecomment,
+    fetchMovieHomeListTrending,
+    fetchTVHomeList,
+} from '../../redux/reducer/ListMovie';
 
 const cx = classNames.bind(styles);
 
@@ -19,7 +23,7 @@ function Home() {
 
     let ListMovieShowRecomment = useSelector((state) => state.ListMovie);
 
-    const [ShowRecomment, setShowRecomment] = useState(ListMovieShowRecomment.MovieHomeListRecomment);
+    const [ShowRecomment, setShowRecomment] = useState([]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -60,24 +64,30 @@ function Home() {
     };
 
     const getData = async () => {
-        await httpRequest.get('/movie/popular', { params: { api_key: import.meta.env.VITE_API_Key } }).then((res) => {
-            setShowRecomment(res.data.results);
-            dispatch(ListMovie.actions.ADD_MovieHomeListRecoment(res.data.results));
-        });
-        await httpRequest
-            .get('/discover/tv', { params: { api_key: '7e4b5abe1ead162fa4cdab607fce59c0' } })
-            .then((res) => dispatch(ListMovie.actions.ADD_TVHomeList(res.data.results)));
-        await httpRequest
-            .get('/trending/movie/day', { params: { api_key: '7e4b5abe1ead162fa4cdab607fce59c0' } })
-            .then((res) => dispatch(ListMovie.actions.ADD_MovieHomeListTrending(res.data.results)));
-        await httpRequest
-            .get('/movie/now_playing', { params: { api_key: '7e4b5abe1ead162fa4cdab607fce59c0' } })
-            .then((res) => dispatch(ListMovie.actions.ADD_MovieHomeList(res.data.results)));
+        // await httpRequest.get('/movie/popular', { params: { api_key: import.meta.env.VITE_API_Key } }).then((res) => {
+        //     setShowRecomment(res.data.results);
+        //     dispatch(ListMovie.actions.ADD_MovieHomeListRecoment(res.data.results));
+        // });
+        // await httpRequest
+        //     .get('/discover/tv', { params: { api_key: '7e4b5abe1ead162fa4cdab607fce59c0' } })
+        //     .then((res) => dispatch(ListMovie.actions.ADD_TVHomeList(res.data.results)));
+        // await httpRequest
+        //     .get('/trending/movie/day', { params: { api_key: '7e4b5abe1ead162fa4cdab607fce59c0' } })
+        //     .then((res) => dispatch(ListMovie.actions.ADD_MovieHomeListTrending(res.data.results)));
+        // await httpRequest
+        //     .get('/movie/now_playing', { params: { api_key: '7e4b5abe1ead162fa4cdab607fce59c0' } })
+        //     .then((res) => dispatch(ListMovie.actions.ADD_MovieHomeList(res.data.results)));
+        dispatch(fetchMovieHomeListRecomment());
+        dispatch(fetchTVHomeList());
+        dispatch(fetchMovieHomeListTrending());
+        dispatch(fetchMovieHomeList());
     };
 
     useEffect(() => {
         if (isFirst.current) {
-            getData();
+            if (ListMovieShowRecomment.MovieHomeListRecomment.length < 1) {
+                getData();
+            }
             isFirst.current = false;
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -107,9 +117,11 @@ function Home() {
                     </div>
 
                     <div className={cx('Home-content-list-movie')}>
-                        {ShowRecomment.map((item) => (
-                            <MovieItem key={item.id} data={item} />
-                        ))}
+                        {ShowRecomment.length > 0
+                            ? ShowRecomment.map((item) => <MovieItem key={item.id} data={item} />)
+                            : ListMovieShowRecomment.MovieHomeListRecomment.map((item) => (
+                                  <MovieItem key={item.id} data={item} />
+                              ))}
                     </div>
                 </div>
 
