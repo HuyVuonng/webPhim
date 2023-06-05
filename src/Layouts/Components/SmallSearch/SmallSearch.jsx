@@ -9,6 +9,7 @@ import no_img from './no_img.png';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 const cx = classNames.bind(styles);
+// eslint-disable-next-line react-refresh/only-export-components
 function SmallSearch() {
     const [searchInput, setSearchInput] = useState('');
     const [searchValue, setSearchValue] = useState([]);
@@ -154,4 +155,5 @@ function SmallSearch() {
     );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default memo(SmallSearch);
