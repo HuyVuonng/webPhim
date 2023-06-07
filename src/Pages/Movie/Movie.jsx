@@ -5,6 +5,7 @@ import httpRequest from '../../httpRequest/httprequest';
 import MovieItem from '../../../Components/MovieItem/MovieItem';
 import ReactPaginate from 'react-paginate';
 import { useSearchParams } from 'react-router-dom';
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
 
 const cx = classNames.bind(styles);
 
@@ -56,7 +57,9 @@ function Movie() {
             <span className={cx('Movie-title')}>Movies</span>
             <div className={cx('Movie-content')}>
                 {movieItem.map((item) => (
-                    <MovieItem key={item.id} data={item} />
+                    <LazyLoadComponent key={item.id}>
+                        <MovieItem data={item} />
+                    </LazyLoadComponent>
                 ))}
             </div>
 

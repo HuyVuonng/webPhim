@@ -135,9 +135,9 @@ function SmallHeader() {
                     <Link to="/tv?page=1">
                         <li className={cx('Header-nav-list-item')}>tv shows</li>
                     </Link>
-                    <Link to="/">
+                    {/* <Link to="/">
                         <li className={cx('Header-nav-list-item')}>top imdb</li>
-                    </Link>
+                    </Link> */}
                 </ul>
                 <SmallSearch />
                 <div className={cx('Header-login-register')}>

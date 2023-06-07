@@ -5,6 +5,7 @@ import httpRequest from '../../httpRequest/httprequest';
 import MovieItem from '../../../Components/MovieItem/MovieItem';
 import ReactPaginate from 'react-paginate';
 import { useParams, useSearchParams } from 'react-router-dom';
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
 
 const cx = classNames.bind(styles);
 
@@ -58,7 +59,9 @@ function Genre() {
             <span className={cx('Genre-title')}>Genres {params.slug}</span>
             <div className={cx('Genre-content')}>
                 {GenreItem.map((item) => (
-                    <MovieItem key={item.id} data={item} />
+                    <LazyLoadComponent key={item.id}>
+                        <MovieItem data={item} />
+                    </LazyLoadComponent>
                 ))}
             </div>
 

@@ -7,6 +7,8 @@ import { faPlayCircle, faStar } from '@fortawesome/free-solid-svg-icons';
 import no_img from './no_img.png';
 import MovieItem from '../../../Components/MovieItem/MovieItem';
 import { useDispatch, useSelector } from 'react-redux';
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
+
 import {
     fetchCast,
     fetchCastTVSHow,
@@ -262,7 +264,9 @@ function WatchingFilms() {
                 <h3 className={cx('Watch-video-recomment-title')}>You may also like</h3>
                 <div className={cx('Watch-video-recomment-item')}>
                     {movie.Recommend.map((item) => (
-                        <MovieItem key={item.id} data={item} />
+                        <LazyLoadComponent key={item.id}>
+                            <MovieItem data={item} />
+                        </LazyLoadComponent>
                     ))}
                 </div>
             </div>

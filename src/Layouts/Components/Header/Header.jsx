@@ -200,9 +200,9 @@ function Header() {
                                 <li className={cx('nav2-list-item-mobile')} onClick={close}>
                                     <Link to="/tv?page=1">TV SHOWS</Link>
                                 </li>
-                                <li className={cx('nav2-list-item-mobile')} onClick={close}>
+                                {/* <li className={cx('nav2-list-item-mobile')} onClick={close}>
                                     <Link to="/">TOP IMDB</Link>
-                                </li>
+                                </li> */}
                             </ul>
                         </div>
                     </div>{' '}
@@ -270,9 +270,9 @@ function Header() {
                             <Link to="/tv?page=1">
                                 <li className={cx('Header-nav-list-item')}>tv shows</li>
                             </Link>
-                            <Link to="/">
+                            {/* <Link to="/">
                                 <li className={cx('Header-nav-list-item')}>top imdb</li>
-                            </Link>
+                            </Link> */}
                         </ul>
 
                         <div className={cx('Header-login-register')}>

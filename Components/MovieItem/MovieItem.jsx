@@ -6,6 +6,8 @@ import { faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import HeadlessTippy from '@tippyjs/react/headless';
 import no_img from './no_img.png';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const cx = classNames.bind(styles);
 
@@ -48,11 +50,18 @@ function MovieItem({ data }) {
                 <Link className={cx('link')} to={`/watch/${data.id}`}>
                     <div className={cx('MovieItem-wrapper')}>
                         <div className={cx('MovieItem-img-wrapper')}>
-                            <img
+                            {/* <img
                                 src={
                                     data.poster_path ? `https://image.tmdb.org/t/p/original${data.poster_path}` : no_img
                                 }
                                 alt=""
+                            /> */}
+                            <LazyLoadImage
+                                src={
+                                    data.poster_path ? `https://image.tmdb.org/t/p/original${data.poster_path}` : no_img
+                                }
+                                alt=""
+                                effect="blur"
                             />
                             <span className={cx('MovieItem-quality')}>HD</span>
                             <div className={cx('MovieItem-hover')}>

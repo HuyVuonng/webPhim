@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faChartLine, faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
 import {
     fetchMovieHomeList,
     fetchMovieHomeListRecomment,
@@ -92,7 +93,6 @@ function Home() {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
     return (
         <div className={cx('Home-wrapper')}>
             <div className={cx('Home-content')}>
@@ -118,9 +118,15 @@ function Home() {
 
                     <div className={cx('Home-content-list-movie')}>
                         {ShowRecomment.length > 0
-                            ? ShowRecomment.map((item) => <MovieItem key={item.id} data={item} />)
+                            ? ShowRecomment.map((item) => (
+                                  <LazyLoadComponent key={item.id}>
+                                      <MovieItem data={item} />
+                                  </LazyLoadComponent>
+                              ))
                             : ListMovieShowRecomment.MovieHomeListRecomment.map((item) => (
-                                  <MovieItem key={item.id} data={item} />
+                                  <LazyLoadComponent key={item.id}>
+                                      <MovieItem data={item} />
+                                  </LazyLoadComponent>
                               ))}
                     </div>
                 </div>
@@ -140,7 +146,9 @@ function Home() {
 
                     <div className={cx('Home-content-list-movie')}>
                         {ListMovieShowRecomment.MovieHomeList.map((item) => (
-                            <MovieItem key={item.id} data={item} />
+                            <LazyLoadComponent key={item.id}>
+                                <MovieItem data={item} />
+                            </LazyLoadComponent>
                         ))}
                     </div>
                 </div>
@@ -160,7 +168,9 @@ function Home() {
 
                     <div className={cx('Home-content-list-movie')}>
                         {ListMovieShowRecomment.TVHomeList.map((item) => (
-                            <MovieItem key={item.id} data={item} />
+                            <LazyLoadComponent key={item.id}>
+                                <MovieItem data={item} />
+                            </LazyLoadComponent>
                         ))}
                     </div>
                 </div>
